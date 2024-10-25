@@ -67,7 +67,35 @@ RUN if [ "$MODEL_TYPE" = "sdxl" ]; then \
       wget -O models/clip/clip_l.safetensors https://huggingface.co/comfyanonymous/flux_text_encoders/resolve/main/clip_l.safetensors && \
       wget -O models/clip/t5xxl_fp8_e4m3fn.safetensors https://huggingface.co/comfyanonymous/flux_text_encoders/resolve/main/t5xxl_fp8_e4m3fn.safetensors && \
       wget --header="Authorization: Bearer ${HUGGINGFACE_ACCESS_TOKEN}" -O models/vae/ae.safetensors https://huggingface.co/black-forest-labs/FLUX.1-dev/resolve/main/ae.safetensors; \
+    #edit: add models
+    elif [ "$MODEL_TYPE" = "relight" ]; then \
+      wget -O models/checkpoints/CyberRealisticXLPlay_V1.0-VAE.safetensors https://huggingface.co/cyberdelia/CyberRealsticXL/resolve/main/CyberRealisticXLPlay_V1.0-VAE.safetensors && \
+      wget -O models/checkpoints/CyberRealistic_V5_FP32.safetensors https://huggingface.co/cyberdelia/CyberRealistic/resolve/main/CyberRealistic_V5_FP32.safetensors && \
+      wget -O models/unet/iclight_sd15_fbc.safetensors https://huggingface.co/lllyasviel/ic-light/resolve/main/iclight_sd15_fbc.safetensors; \
     fi
+
+# edit: add custom nodes
+RUN git clone https://github.com/Fannovel16/ComfyUI-Video-Matting.git custom_nodes/ComfyUI-Video-Matting
+RUN pip3 install -r custom_nodes/ComfyUI-Video-Matting/requirements.txt
+RUN git clone https://github.com/cubiq/ComfyUI_essentials.git custom_nodes/ComfyUI_essentials
+RUN pip3 install -r custom_nodes/ComfyUI_essentials/requirements.txt
+RUN git clone https://github.com/kijai/ComfyUI-KJNodes.git custom_nodes/ComfyUI-KJNodes
+RUN pip3 install -r custom_nodes/ComfyUI-KJNodes/requirements.txt
+RUN git clone https://github.com/jamesWalker55/comfyui-various.git custom_nodes/comfyui-various
+RUN pip3 install -r custom_nodes/comfyui-various/requirements.txt
+RUN git clone https://github.com/chflame163/ComfyUI_LayerStyle.git custom_nodes/ComfyUI_LayerStyle
+RUN pip3 install -r custom_nodes/ComfyUI_LayerStyle/requirements.txt
+RUN git clone https://github.com/ltdrdata/ComfyUI-Impact-Pack.git custom_nodes/ComfyUI-Impact-Pack
+RUN pip3 install -r custom_nodes/ComfyUI-Impact-Pack/requirements.txt
+RUN git clone https://github.com/rgthree/rgthree-comfy.git custom_nodes/rgthree-comfy
+RUN pip3 install -r custom_nodes/rgthree-comfy/requirements.txt
+RUN git clone https://github.com/kijai/ComfyUI-IC-Light.git custom_nodes/ComfyUI-IC-Light
+RUN pip3 install -r custom_nodes/ComfyUI-IC-Light/requirements.txt
+RUN git clone https://github.com/huagetai/ComfyUI-Gaffer.git custom_nodes/ComfyUI-Gaffer
+RUN pip3 install -r custom_nodes/ComfyUI-Gaffer/requirements.txt
+RUN git clone https://github.com/Youngryeol/ImageUtil.git custom_nodes/ImageUtil
+#RUN pip3 install -r custom_nodes/ImageUtil/requirements.txt
+
 
 # Stage 3: Final image
 FROM base as final
