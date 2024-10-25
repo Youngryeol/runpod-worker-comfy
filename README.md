@@ -323,7 +323,7 @@ If you prefer to include your models directly in the Docker image, follow these 
      ```bash
      docker build --build-arg MODEL_TYPE=sd3 --build-arg HUGGINGFACE_ACCESS_TOKEN=<your-huggingface-token> -t <your_dockerhub_username>/runpod-worker-comfy:dev-sd3 --platform linux/amd64 .
      ```
-  - Build the **리라이팅** image locally:
+   - Build the **리라이팅** image locally:
      ```bash
      docker build --build-arg MODEL_TYPE=relight --build-arg HUGGINGFACE_ACCESS_TOKEN=<your-huggingface-token> -t <your_dockerhub_username>/runpod-worker-comfy:gs-relight --platform linux/amd64 .
      ```
